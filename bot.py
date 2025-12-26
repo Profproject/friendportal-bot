@@ -66,7 +66,8 @@ def init_db():
             balance REAL DEFAULT 0,
             last_invoice_id INTEGER,
             ref_bonus INTEGER DEFAULT 0,
-            language_code TEXT
+            language_code TEXT,
+            created_at INTEGER
         )
         """)
         con.execute("""
