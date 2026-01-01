@@ -247,24 +247,6 @@ async def stats(call: types.CallbackQuery):
     await call.message.answer(f"<b>{t(call.from_user,'stats_title')}</b>\n\n{text}")
     await call.answer()
 
-@dp.callback_query_handler(lambda c: c.data == "active_today")
-async def active_today(call: types.CallbackQuery):
-    now = int(time.time())
-    day_ago = now - 86400  # 24 часа
-
-    with db() as con:
-        r = con.execute(
-            "SELECT COUNT(*) FROM users WHERE created_at >= ?",
-            (day_ago,)
-        ).fetchone()
-
-    count = r[0] if r else 0
-
-    await call.message.answer(
-        t(call.from_user, "active_today_text").format(count=count)
-    )
-    await call.answer()
-
 # ================= HOW IT WORKS =================
 @dp.callback_query_handler(lambda c: c.data == "how_it_works")
 async def how_it_works(call: types.CallbackQuery):
@@ -336,4 +318,5 @@ async def handle_withdraw(msg: types.Message):
 if __name__ == "__main__":
     init_db()
     executor.start_polling(dp, skip_updates=True)
+
 
