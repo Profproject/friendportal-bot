@@ -145,10 +145,6 @@ def menu_kb(user):
     kb.add(InlineKeyboardButton(t(user, "withdraw"), callback_data="withdraw"))
     kb.add(InlineKeyboardButton(t(user, "stats"), callback_data="stats"))
     kb.add(InlineKeyboardButton(t(user, "how_it_works_button"), callback_data="how_it_works"))
-    kb.add(InlineKeyboardButton(
-    t(user, "active_today_button"),
-    callback_data="active_today"
-))
     return kb
 
 # ================= START =================
@@ -340,3 +336,4 @@ async def handle_withdraw(msg: types.Message):
 if __name__ == "__main__":
     init_db()
     executor.start_polling(dp, skip_updates=True)
+
